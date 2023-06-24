@@ -1,5 +1,5 @@
 <script>
-import { superStore } from './components/store/superStore';
+import { superStore } from '../store/superStore';
 
 export default {
   data() {
@@ -12,9 +12,6 @@ export default {
 
   },
   async created() {
-    let aux = await this.store.logIn("email 1","clave 1")
-
-    console.log(aux)
 
   } 
 
@@ -25,7 +22,7 @@ export default {
 <template>
 
 <div>
-  123213123123123
+  SOY EL HOME
 </div>
 
 </template>

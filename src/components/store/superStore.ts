@@ -10,6 +10,7 @@ export const superStore = defineStore('supermercadoStore', {
     actions: {
 
         logIn(email, clave) {
+
             //genera una promesa, si el usuarios es logedo exitosamente devuelve true, en caso contrario false
             return new Promise(async (resolve,) => {
 
@@ -36,7 +37,6 @@ export const superStore = defineStore('supermercadoStore', {
             let index = 0;
             let encontrado = false;
 
-            debugger;
 
             while (index < usuarios.length && !encontrado) {
                 let usuario = usuarios[index];

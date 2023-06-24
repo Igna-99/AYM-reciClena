@@ -20,7 +20,6 @@ export default {
 
   soy el registro
 
-
 </template>
 
 
