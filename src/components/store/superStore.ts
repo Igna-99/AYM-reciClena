@@ -69,7 +69,11 @@ export const superStore = defineStore('supermercadoStore', {
                 alert("no se pudo relogear :(")
                 window.localStorage.removeItem("usuario");
             }
-        }
+        },
+
+        registrarse(razonSocial,cuit,email,calve,direccion,CBU,telefono){
+
+        },
 
     },
     getters: {
