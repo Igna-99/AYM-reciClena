@@ -1,11 +1,36 @@
 <script>
+import { superStore } from './components/store/superStore';
+
+export default {
+  data() {
+    return {
+      store: superStore()
+    }
+  },
+  methods: {
+
+
+  },
+  async created() {
+    let aux = await this.store.logIn("email 1","clave 1")
+
+    console.log(aux)
+
+  } 
+
+}
+
 
 
 </script>
 
+
 <template>
 
-  hola
+<div>
+  123123
+  <RouterView></RouterView>
+</div>
 
 </template>
 
