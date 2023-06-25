@@ -37,14 +37,11 @@ export default {
           <router-link class="nav-link active" to="/login"> Iniciar Secion</router-link>
           <router-link class="nav-link" to="/registro"> Registrarse </router-link>
         </div>
-        <div class="navbar-nav" v-else>
-          <button class="nav-link active" @click="salir"> Cerrar Sesion </button>
-        </div>
       </div>
     </div>
   </nav>
 
-
+  
   <div>
     <RouterView></RouterView>
   </div>
