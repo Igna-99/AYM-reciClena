@@ -1,4 +1,5 @@
 import { defineStore } from "pinia";
+import axios from "axios";
 
 
 
@@ -12,7 +13,7 @@ export const superStore = defineStore('supermercadoStore', {
         logIn(email, clave) {
 
             //genera una promesa, si el usuarios es logedo exitosamente devuelve true, en caso contrario false
-            return new Promise(async (resolve,) => {
+            return new Promise(async (resolve) => {
 
                 const url = new URL('https://649752cc83d4c69925a397f1.mockapi.io/api/v1/Supermercado');
 
@@ -63,16 +64,43 @@ export const superStore = defineStore('supermercadoStore', {
             // si la clave y email no fueron cambiadas relogea automaticamente, en caso contrario lanza un alert 
 
             let item = JSON.parse(String(window.localStorage.getItem("usuario")));
-            let relogeado = await this.logIn(item.email, item.password)
 
-            if(!relogeado){
-                alert("no se pudo relogear :(")
-                window.localStorage.removeItem("usuario");
+            if(item != null){
+
+                let relogeado = await this.logIn(item.email, item.clave)
+                
+                if (!relogeado) {
+                    alert("no se pudo relogear :(")
+                    window.localStorage.removeItem("usuario");
+                }
+
             }
+
         },
 
-        registrarse(razonSocial,cuit,email,calve,direccion,CBU,telefono){
+        async registrarse(razonSocial, cuit, email, clave, direccion, CBU, telefono) {
 
+            debugger;
+
+            let resultado = true
+
+            if (razonSocial == null || cuit == null || email == null || clave == null || direccion == null || CBU == null || telefono == null) {
+                resultado = false
+            } else {
+                const url = 'https://649752cc83d4c69925a397f1.mockapi.io/api/v1/Supermercado';
+                const data = {
+                    razonSocial,
+                    cuit,
+                    email,
+                    clave,
+                    direccion,
+                    CBU,
+                    telefono
+                };
+                await axios.post(url, data);
+            }
+
+            return resultado;
         },
 
     },

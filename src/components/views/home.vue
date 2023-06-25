@@ -25,6 +25,16 @@ export default {
   SOY EL HOME
 </div>
 
+
+<div v-if="this.store.isLogged">
+  estoy logeado
+</div>
+<div v-else>
+  no estoy logeado
+</div>
+
+
+
 </template>
 
 

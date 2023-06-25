@@ -3,13 +3,20 @@ import { superStore } from './components/store/superStore';
 import { RouterLink } from 'vue-router';
 
 export default {
-    data() {
-        return {
-            store: superStore()
-        };
-    },
-    methods: {},
-    components: { RouterLink }
+  data() {
+    return {
+      store: superStore()
+    };
+  },
+  methods: {
+    salir() {
+      // metodo salir de usuario
+      this.store.logOut()
+    }
+  },
+  mounted() {
+    this.store.cargarDataStorage()
+  },
 }
 
 
@@ -26,10 +33,12 @@ export default {
         <span class="navbar-toggler-icon"></span>
       </button>
       <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-        <div class="navbar-nav">
-          <router-link class="nav-link active" to="/login">Iniciar Secion</router-link>
-          <router-link class="nav-link" to="/registro">Registrarse</router-link>
-
+        <div class="navbar-nav" v-if="!this.store.isLogged">
+          <router-link class="nav-link active" to="/login"> Iniciar Secion</router-link>
+          <router-link class="nav-link" to="/registro"> Registrarse </router-link>
+        </div>
+        <div class="navbar-nav" v-else>
+          <button class="nav-link active" @click="salir"> Cerrar Sesion </button>
         </div>
       </div>
     </div>

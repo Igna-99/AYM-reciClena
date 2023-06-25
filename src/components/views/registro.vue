@@ -1,47 +1,54 @@
 <template>
+  <div v-if="!this.store.isLogged" class="divf">
 
-<div v-if="!this.store.isLogged" class="formulario">
+    <h1>Registrarme</h1>
+    Razon social, Cuit, Correo, clave, sucursales, dirección, nro de CBU, telefono.
 
-  </div> 
+    <legend><span class="number">1</span> Your basic info</legend>
 
+    <label for="name">Razon social:</label>
+    <input type="text" v-model="this.razonSocial">
 
-<form action="index.html" method="post">
-            
-            <h1>Registrarme</h1>
-            Razon social, Cuit, Correo, clave, sucursales, dirección, nro de CBU, telefono.
-              
-              <legend><span class="number">1</span> Your basic info</legend>
-              
-              <label for="name">Razon social:</label>
-              <input type="text" id="razonSocial" name="razon_social">
-              <label for="name">Cuit:</label>
-              <input type="text" id="cuit" name="cuit">
-              
-              <label for="mail">Email:</label>
-              <input type="email" id="mail" name="user_email">
-              
-              <label for="password">Clave:</label>
-              <input type="password" id="password" name="user_password">
+    <label for="name">Cuit:</label>
+    <input type="text" v-model="this.cuit">
 
-              <label for="password">Confirmar Clave:</label>
-              <input type="password" id="password" name="user_password">
+    <label for="mail">Email:</label>
+    <input type="email" v-model="this.email">
 
-              <label for="name">Dirección:</label>
-              <input type="text" id="direccion" name="Dirección">
+    <label for="password">Clave:</label>
+    <input type="password" v-model="this.clave">
 
-              <label for="name">CBU:</label>
-              <input type="text" id="direccion" name="Dirección">
+    <label for="password">Confirmar Clave:</label>
+    <input type="password" v-model="this.confirmClave">
 
-              <label for="name">Teléfono:</label>
-              <input type="text" id="direccion" name="Dirección">
-                                        
-            <button type="Aceptar" @click="ingresar">Sign Up</button>
-            
-          </form>
+    <label for="name">Dirección:</label>
+    <input type="text" v-model="this.direccion">
 
+    <label for="name">CBU:</label>
+    <input type="text" v-model="this.CBU">
+
+    <label for="name">Teléfono:</label>
+    <input type="text" v-model="this.telefono">
+
+    <button type="submit" @click="registrse">Sign Up</button>
+
+    <button type="reset">Borrar todo</button>
+
+    <div v-if="this.error1" class="alert alert-danger" role="alert">
+      no se han ingresado todos los datos necesarios
+    </div>
+    <div v-if="this.error2" class="alert alert-danger" role="alert">
+      El Email es invalido
+    </div>
+    <div v-if="this.error3" class="alert alert-danger" role="alert">
+      las claves no son iguales
+    </div>
+
+  </div>
 </template>
 
 <script>
+import { useRouter } from "vue-router";
 import { superStore } from '../store/superStore';
 
 export default {
@@ -50,14 +57,64 @@ export default {
       store: superStore(),
       error1: false,
       error2: false,
+      error3: false,
+      razonSocial: "",
+      cuit: "",
       email: "",
-      password: "",
+      clave: "",
+      confirmClave: "",
+      direccion: "",
+      CBU: "",
+      telefono: "",
+
+
     }
   },
   methods: {
-    registrse(){
 
+    async registrse() {
+
+
+      this.error1 = false;
+      this.error2 = false;  
+      this.error3 = false;
+
+      if (this.razonSocial == "" || this.cuit == "" || this.email == "" || this.clave == "" || this.direccion == "" || this.CBU == "" || this.telefono == "" ) {
+
+        this.error1 = true;
+
+      } else if (!this.emailValido()) {
+
+        this.error2 = true;
+
+      } else if (this.clave != this.confirmClave){
+
+        this.error3 = true;
+
+      } else {
+
+
+        let todoPelota = await this.store.registrarse(this.razonSocial,this.cuit,this.email,this.clave,this.direccion,this.CBU,this.telefono)
+
+        if(todoPelota) 
+        {
+          alert("todo pelota")
+          let tame = await this.store.logIn(this.email,this.clave)
+
+          if(tame){
+            this.$router.push("/");
+          }
+        }
+      };
     },
+
+    emailValido(){
+      let patron = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
+      return patron.test(this.email)
+    }
+
+
+
 
   }
 
@@ -66,7 +123,9 @@ export default {
 
 
 <style scoped>
-    *, *:before, *:after {
+*,
+*:before,
+*:after {
   -moz-box-sizing: border-box;
   -webkit-box-sizing: border-box;
   box-sizing: border-box;
@@ -77,7 +136,7 @@ body {
   color: #384047;
 }
 
-form {
+.divf {
   max-width: 300px;
   margin: 10px auto;
   padding: 10px 20px;
@@ -102,7 +161,7 @@ input[type="time"],
 input[type="url"],
 textarea,
 select {
-  background: rgba(255,255,255,0.1);
+  background: rgba(255, 255, 255, 0.1);
   border: none;
   font-size: 16px;
   height: auto;
@@ -112,7 +171,7 @@ select {
   width: 100%;
   background-color: #e8eeef;
   color: #8a97a0;
-  box-shadow: 0 1px 0 rgba(0,0,0,0.03) inset;
+  box-shadow: 0 1px 0 rgba(0, 0, 0, 0.03) inset;
   margin-bottom: 30px;
 }
 
@@ -134,7 +193,7 @@ button {
   width: 100%;
   border: 1px solid #3ac162;
   border-width: 1px 1px 3px;
-  box-shadow: 0 -1px 0 rgba(255,255,255,0.1) inset;
+  box-shadow: 0 -1px 0 rgba(255, 255, 255, 0.1) inset;
   margin-bottom: 10px;
 }
 
@@ -168,17 +227,15 @@ label.light {
   margin-right: 4px;
   line-height: 30px;
   text-align: center;
-  text-shadow: 0 1px 0 rgba(255,255,255,0.2);
+  text-shadow: 0 1px 0 rgba(255, 255, 255, 0.2);
   border-radius: 100%;
 }
 
 @media screen and (min-width: 480px) {
 
-  form {
+  .divf {
     max-width: 480px;
   }
 
 }
-
-
 </style>
