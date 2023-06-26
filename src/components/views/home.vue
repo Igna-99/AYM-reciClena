@@ -40,7 +40,7 @@ export default {
 
   <div v-else>
     <div class="nolo">
-    <img src="https://lh3.googleusercontent.com/pw/AJFCJaVcwIWiabZJHRjUTPSRKDLXWpDU9FqjyylR8xdAvF1mp3vRYOm7jKORtglCi2-53Ro2ZkXMMbI1gYKicDo1XiW0-YoplYh1jRzkIzjHVsmq16n0ScYlPpwC2sfCtPQFy8BXun30P1Ep35WPaNkslovbRKlZQWZGvu0zOU0Ke4iW4Re_tywp6G1xAWNuU5ZcU2WOk8Hxuaq8zsS_FsDDBi_cD5e2ctPqXRYyplPPq8-_GLUlBQ9zzDfoCwEFSK7E--3O9mil-1qh9zftc4-n3APjt7ijcbb5LtM1Dm5y0pdbahuLmQRnYW1ZNtsocqOVM1YOcDKhWrcjsODCDqJohMC95m_LZ5VzOWjz5Nmm0H0Il-AI7MMTMVNHF97fdMmnCY-ULnZbl4O9dvwzYZCQsQWwNhhlBXlJVC1UdS2Wm9SxP4T3Ub3gOuWkUWTw-7NabtO5QcsYI27i61vFi97T7-S8ZEokxYei2FmSe0fTsUAKsrknN3vdEDfFRAX-LcU5740BhIuobse89nZO8_VTR79nMuZS--2bJOT7ZbQPvSrciCeU9Hh_KuSsIpnrFKfGqQq15UMRO6ueDYm0bUWWYIjE1nNow8p1ZZllvHV_lRgPIOxOhqXXggwxuO7RKPwTM64Cx19EM062N5bHmAchY2U1BGQH4xY3mQ-ShHJcvBHhbszSz5uH9Gu-M32RfpBJKDbtve7nZA__ZUXTOVhVQxlxZ69aKNxavyCgIg3o-0xXgR6B427ELbgUmk_YvabRqFHhqiwstvw7qbZRVZxU_JinWHl1UG0EU5ojq1Nn8h5zDEUMeC6YCLACnhYSMITHSkdVApFvLsKd-3LKTc7ojWgYQrEuORX3MUYJHWvY0mBwH40_8Lpq0MoLFapdBFczKOELs1l-NDHH8eWDK0XCXuGizJ0BqxBxZqPf7P-15O2NbSckkqzNMtsMbkwj_0KgIl-81wJK4e0kgmNjm2TTqPtnGIgGq8eaKdHuaNQIByYm5rJjyNE4R1YJJrfcVd3n=w1325-h331-s-no?authuser=1" alt="Imagen">
+    <img src="../../assets/fondo.jpeg" alt="Imagen">
     <div class="home_title">SI AMAS LA TIERRA, RECICLA Y CONSERVA</div>
     <div class="textnolo">Recicla con RECICLYNG</div>
   </div>  
@@ -50,6 +50,10 @@ export default {
 
 
 <style scoped>
+@import url('https://fonts.googleapis.com/css2?family=Belanosima&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Oswald&display=swap');
+
 #contenedor {
   display: flex;
   flex-direction: column;
@@ -111,9 +115,6 @@ button {
   }
 
 }
-@import url('https://fonts.googleapis.com/css2?family=Belanosima&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Oswald&display=swap');
 
 body {
   height: 100h;
