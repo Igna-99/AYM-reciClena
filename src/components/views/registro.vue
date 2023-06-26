@@ -61,7 +61,7 @@
           </div>
         </div>
         <button class="ingresar" type="submit" @click="registrse">Sign Up</button>
-        <button type="reset">Borrar todo</button>
+        <button type="reset"  @click="resetForm">Borrar todo</button>
 
         <div v-if="this.error1" class="alert alert-danger" role="alert">
           no se han ingresado todos los datos necesarios
@@ -134,7 +134,7 @@ export default {
         let todoPelota = await this.store.registrarse(this.razonSocial, this.cuit, this.email, this.clave, this.direccion, this.CBU, this.telefono)
 
         if (todoPelota) {
-          alert("todo pelota")
+          alert("Registro exitoso")
           let tame = await this.store.logIn(this.email, this.clave)
 
           if (tame) {
@@ -147,6 +147,16 @@ export default {
     emailValido() {
       let patron = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
       return patron.test(this.email)
+    },
+    resetForm(){
+      this.razonSocial = "",
+      this.cuit = "",
+      this.email =  "",
+      this.clave =  "",
+      this.confirmClave =  "",
+      this.direccion =  "",
+      this.CBU = "",
+      this.telefono =  ""
     }
   }
 }

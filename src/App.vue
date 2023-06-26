@@ -12,6 +12,8 @@ export default {
     salir() {
       // metodo salir de usuario
       this.store.logOut()
+      alert('Cierre de sesión exitosa')
+
     }
   },
   mounted() {
