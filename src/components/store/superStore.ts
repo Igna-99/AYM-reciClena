@@ -6,6 +6,7 @@ import axios from "axios";
 export const superStore = defineStore('supermercadoStore', {
     state: () => ({
         currentUser: null,
+        url: new URL('https://649752cc83d4c69925a397f1.mockapi.io/api/v1/Supermercado')
     }),
 
     actions: {
@@ -15,14 +16,14 @@ export const superStore = defineStore('supermercadoStore', {
             //genera una promesa, si el usuarios es logedo exitosamente devuelve true, en caso contrario false
             return new Promise(async (resolve) => {
 
-                const url = new URL('https://649752cc83d4c69925a397f1.mockapi.io/api/v1/Supermercado');
+                this.url.searchParams.set('email', email);
 
-                url.searchParams.set('email', email);
-
-                let res = await fetch(url, {
+                let res = await fetch(this.url, {
                     method: 'GET',
                     headers: { 'content-type': 'application/json' },
                 })
+
+
                 let data = await res.json()
 
                 resolve(this.comprobar(data, email, clave))
@@ -65,10 +66,10 @@ export const superStore = defineStore('supermercadoStore', {
 
             let item = JSON.parse(String(window.localStorage.getItem("usuario")));
 
-            if(item != null){
+            if (item != null) {
 
                 let relogeado = await this.logIn(item.email, item.clave)
-                
+
                 if (!relogeado) {
                     alert("no se pudo relogear :(")
                     window.localStorage.removeItem("usuario");
@@ -80,13 +81,23 @@ export const superStore = defineStore('supermercadoStore', {
 
         async registrarse(razonSocial, cuit, email, clave, direccion, CBU, telefono) {
 
-            debugger;
+            debugger
 
             let resultado = true
 
             if (razonSocial == null || cuit == null || email == null || clave == null || direccion == null || CBU == null || telefono == null) {
+
                 resultado = false
+
+            } else if ( await this.existeMail(email) ) {
+
+                alert("Email ya registrado")
+
+                resultado = false
+
             } else {
+
+
                 const url = 'https://649752cc83d4c69925a397f1.mockapi.io/api/v1/Supermercado';
                 const data = {
                     razonSocial,
@@ -97,11 +108,34 @@ export const superStore = defineStore('supermercadoStore', {
                     CBU,
                     telefono
                 };
+
                 await axios.post(url, data);
             }
 
             return resultado;
+
         },
+
+        async existeMail(mail){
+
+            debugger
+
+            let result = false
+
+            const url = `https://649752cc83d4c69925a397f1.mockapi.io/api/v1/Supermercado?email=${mail}`
+
+            let emails = await axios.get(url);
+
+
+            if(emails.data.length != 0){
+                result = true
+            }
+
+            return result
+            
+
+        }
+
 
     },
     getters: {

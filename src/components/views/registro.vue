@@ -136,7 +136,6 @@ export default {
         if (todoPelota) {
           alert("Registro exitoso")
           let tame = await this.store.logIn(this.email, this.clave)
-
           if (tame) {
             this.$router.push("/");
           }
@@ -157,6 +156,10 @@ export default {
       this.direccion =  "",
       this.CBU = "",
       this.telefono =  ""
+    },
+
+    salir() {
+      this.store.logOut()
     }
   }
 }
